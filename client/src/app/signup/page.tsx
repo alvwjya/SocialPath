@@ -2,13 +2,14 @@
 import {
   Box,
   Button,
-  Checkbox,
+  InputAdornment,
   Container,
   CssBaseline,
-  IconButton,
-  InputAdornment,
+  Alert,
+  Snackbar,
   Stack,
   TextField,
+  IconButton,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -46,6 +47,7 @@ function Login() {
             minHeight: 500,
             borderRadius: "0.5rem",
             flexDirection: "column",
+            bgcolor: "",
             display: "flex",
             boxShadow: 3,
             padding: 5,
@@ -59,9 +61,19 @@ function Login() {
             sx={{ fontWeight: "medium" }}
             color="primary.light"
           >
-            Log in to continue your journey
+            Sign up to start your jurney
           </Typography>
           <Stack component="form" flex={1} width="100%" sx={{ mt: 3 }}>
+            <TextField
+              id="fullName"
+              label="Full Name"
+              variant="outlined"
+              margin="normal"
+              type="text"
+              autoComplete="name"
+              required
+              fullWidth
+            />
             <TextField
               id="email"
               label="Email Address"
@@ -69,6 +81,16 @@ function Login() {
               margin="normal"
               type="email"
               autoComplete="email"
+              required
+              fullWidth
+            />
+            <TextField
+              id="username"
+              label="Username"
+              variant="outlined"
+              margin="normal"
+              type="text"
+              autoComplete="username"
               required
               fullWidth
             />
@@ -96,31 +118,40 @@ function Login() {
                 ),
               }}
             />
-            <Stack direction="row" sx={{ mb: 1 }}>
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember Me"
-              /> */}
-              <Button
-                variant="text"
-                sx={{
-                  textTransform: "none",
-                  "&:hover": { textDecoration: "underline" },
-                }}
-              >
-                Forgot password?
-              </Button>
-            </Stack>
+            <TextField
+              id="confirmPassword"
+              label="Confirm Password"
+              variant="outlined"
+              margin="normal"
+              autoComplete="current-password"
+              required
+              fullWidth
+              type={showPassword ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
             <Button
               variant="contained"
               size="large"
               fullWidth
-              sx={{ textTransform: "none" }}
+              sx={{ textTransform: "none", mt: 3 }}
             >
-              Log in
+              Sign up
             </Button>
             <Stack direction="row" sx={{ mt: 3, alignItems: "center" }}>
-              <Typography>New to SocialPath?</Typography>
+              <Typography>Already have an account?</Typography>
               <Button
                 variant="text"
                 sx={{
@@ -128,7 +159,7 @@ function Login() {
                   "&:hover": { textDecoration: "underline" },
                 }}
               >
-                Join now
+                Log in
               </Button>
             </Stack>
           </Stack>
